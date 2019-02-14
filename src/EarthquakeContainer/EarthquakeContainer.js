@@ -2,12 +2,37 @@ import React, { Component } from 'react';
 import EarthquakeList from './EarthquakeList'
 
 export default class EarthquakeContainer extends Component{
+
 	state={
 		earthquakes: []
 	}
+	getFormattedDate(date) {
+	  let year = date.getFullYear();
+
+	  let month = (1 + date.getMonth()).toString();
+	  month = month.length > 1 ? month : '0' + month;
+
+	  let day = date.getDate().toString();
+	  day = day.length > 1 ? day : '0' + day;
+	  
+	  return year + '-' + month + '-' + day;
+	}
+	getFormattedDateMinusSeven(date) {
+	  let year = date.getFullYear();
+
+	  let month = (1 + date.getMonth()).toString();
+	  month = month.length > 1 ? month : '0' + month;
+
+	  let day = (date.getDate()-7).toString();
+	  day = day.length > 1 ? day : '0' + day;
+	  
+	  return year + '-' + month + '-' + day;
+	}
+
 	getEarthquakes = async () => { 
 		try{
-			let earthquakes = await fetch('https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-01-01&endtime=2018-01-02')
+			let today = new Date()
+			let earthquakes = await fetch(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.getFormattedDateMinusSeven(today)}&endtime=${this.getFormattedDate(today)}`)
 			let earthquakesJSON = await earthquakes.json()
 			this.setState({
 				earthquakes: earthquakesJSON.features

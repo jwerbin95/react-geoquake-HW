@@ -24,11 +24,12 @@ export default class MapContainer extends Component {
         	this.props.earthquakes.map((earthquake, i)=>{
 	        	return (
 	        		<AnyReactComponent 
+	        		key={i}
 	        		lat={earthquake.geometry.coordinates[1]}
 	        		lng={earthquake.geometry.coordinates[0]}
 	        		image={'images/earthquake.png'}
-	        		width={earthquake.properties.mag+20}
-	        		height={earthquake.properties.mag+20}
+	        		width={(earthquake.properties.mag*4)+10}
+	        		height={(earthquake.properties.mag*4)+10}
 	        		/>
 	        	)
         	})
