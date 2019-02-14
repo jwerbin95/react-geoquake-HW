@@ -7,9 +7,7 @@ const EarthquakeList = (props) =>{
 			<li key={i}>
 				<p>Magnitude: {earthquake.properties.mag}</p>
 				<p>Date: {new Date(earthquake.properties.time).toString()}</p>
-				<p>Longitude: {earthquake.geometry.coordinates[0]}</p>
-				<p>Latitude: {earthquake.geometry.coordinates[1]}</p>
-				<p>Altitude: {earthquake.geometry.coordinates[2]}</p>
+				<p>Location: {earthquake.properties.title}</p>
 			</li>
 		)
 	})

@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="mapContainer">
+        <div className="mapContainer" id="mapContainer">
           <MapContainer earthquakes={this.state.earthquakes}/>
         </div>
         <div className="quakeContainer">
