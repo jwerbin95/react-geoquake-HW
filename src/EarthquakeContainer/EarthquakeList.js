@@ -15,18 +15,18 @@ const EarthquakeList = (props) =>{
 		else
 			cardColor="ui red fluid card"
 		return (
-			<div class={cardColor}>
-				<div class="content">
+			<div className={cardColor} key={i}>
+				<div className="content">
 					<p>Magnitude: {earthquake.properties.mag}</p>
 					<p>Date: {new Date(earthquake.properties.time).toString()}</p>
 					<p>Location: {earthquake.properties.title}</p>
-					<button class="ui button" onClick={props.changeLocation.bind(null, center, 11)}>Go To Location</button>
+					<button className="ui button" onClick={props.changeLocation.bind(null, center, 11)}>Go To Location</button>
 				</div>
 			</div>
 		)
 	})
 	return(
-		<div class="ui cards">
+		<div className="ui cards">
 			{earthquakeList}
 		</div>
 	)

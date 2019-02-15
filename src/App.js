@@ -33,8 +33,8 @@ class App extends Component {
           />
         </div>
         <div className="quakeContainer">
-          <div class="title">
-            <h2 class="ui header"><i aria-hidden="true" class="list icon"></i><div class="content">Weekly Earthquake Report</div></h2>
+          <div className="title">
+            <h2 className="ui header"><i aria-hidden="true" className="list icon"></i><div className="content">Weekly Earthquake Report</div></h2>
           </div>
           <EarthquakeContainer getEarthquakeData={this.getEarthquakeData} changeLocation={this.changeLocation}/>
         </div>
