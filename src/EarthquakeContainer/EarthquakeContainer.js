@@ -27,6 +27,7 @@ export default class EarthquakeContainer extends Component{
 				earthquakes: earthquakesJSON.features
 			})
 			await this.props.getEarthquakeData(this.state.earthquakes)
+			return earthquakesJSON.features
 		}
 		catch(error){
 			console.log(error.stack)
@@ -34,9 +35,13 @@ export default class EarthquakeContainer extends Component{
 		}
 	}
 	componentDidMount(){
+		let callback=this.getEarthquakes
 		this.getEarthquakes().then(data=>{
 			console.log("Component mounted successfully")
 		})
+		setInterval(function(){callback().then(data=>{
+			console.log("Fetched Earthquake Data!")
+		})}, 300000)
 	}
 	render(){
 		if(this.state.earthquakes[0]===undefined){
