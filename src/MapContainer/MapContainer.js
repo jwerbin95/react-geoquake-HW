@@ -14,12 +14,19 @@ export default class MapContainer extends Component {
         >
         {
         	this.props.earthquakes.map((earthquake, i)=>{
+        		let markerIcon = ""
+        		if(earthquake.properties.mag<2)
+					markerIcon="images/earthquakeGreen.png"
+				else if(earthquake.properties.mag<5 && earthquake.properties.mag>2)
+					markerIcon="images/earthquakeYellow.png"
+				else
+					markerIcon="images/earthquakeRed.png"
 	        	return (
 	        		<AnyReactComponent 
 	        		key={i}
 	        		lat={earthquake.geometry.coordinates[1]}
 	        		lng={earthquake.geometry.coordinates[0]}
-	        		image={'images/earthquake.png'}
+	        		image={markerIcon}
 	        		width={(earthquake.properties.mag*4)+10}
 	        		height={(earthquake.properties.mag*4)+10}
 	        		/>
