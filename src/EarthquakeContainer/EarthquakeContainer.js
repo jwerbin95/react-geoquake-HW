@@ -6,24 +6,13 @@ export default class EarthquakeContainer extends Component{
 	state={
 		earthquakes: []
 	}
-	getFormattedDate(date) {
+	getFormattedDate(date, daysPast) {
 	  let year = date.getFullYear();
 
 	  let month = (1 + date.getMonth()).toString();
 	  month = month.length > 1 ? month : '0' + month;
 
-	  let day = date.getDate().toString();
-	  day = day.length > 1 ? day : '0' + day;
-	  
-	  return year + '-' + month + '-' + day;
-	}
-	getFormattedDateMinusSeven(date) {
-	  let year = date.getFullYear();
-
-	  let month = (1 + date.getMonth()).toString();
-	  month = month.length > 1 ? month : '0' + month;
-
-	  let day = (date.getDate()-7).toString();
+	  let day = (date.getDate()-daysPast).toString();
 	  day = day.length > 1 ? day : '0' + day;
 	  
 	  return year + '-' + month + '-' + day;
@@ -32,7 +21,7 @@ export default class EarthquakeContainer extends Component{
 	getEarthquakes = async () => { 
 		try{
 			let today = new Date()
-			let earthquakes = await fetch(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.getFormattedDateMinusSeven(today)}&endtime=${this.getFormattedDate(today)}`)
+			let earthquakes = await fetch(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${this.getFormattedDate(today, 7)}&endtime=${this.getFormattedDate(today, 0)}`)
 			let earthquakesJSON = await earthquakes.json()
 			this.setState({
 				earthquakes: earthquakesJSON.features
@@ -56,7 +45,7 @@ export default class EarthquakeContainer extends Component{
 		else{
 			return(
 				<div>
-					<EarthquakeList earthquakes={this.state.earthquakes}/>
+					<EarthquakeList earthquakes={this.state.earthquakes} changeLocation={this.props.changeLocation}/>
 				</div>
 			)
 		}
